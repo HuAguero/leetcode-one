@@ -3,7 +3,7 @@ package link.list;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("ALL")
+
 public class LinkCycleCheck {
 
     public static void main(String[] args) {
