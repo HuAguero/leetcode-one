@@ -1,8 +1,7 @@
 package tree;
 
-import sun.reflect.generics.tree.Tree;
-
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
 二叉树遍历
@@ -28,7 +27,10 @@ public class TreeForeach {
 
         //preOrderRootLeftRight(node1);
         //midOrderLeftRootRight(node1);
-        afterOrderLeftRightRoot(node1);
+        //afterOrderLeftRightRoot(node1);
+        ArrayList list = new ArrayList();
+        levelOrder(node1, 1, list);
+        System.out.println(Arrays.toString(list.toArray()));
     }
 
     //前序遍历
@@ -65,6 +67,22 @@ public class TreeForeach {
         System.out.println(root.val);
     }
 
+    public static void levelOrder(TreeNode root, int i, ArrayList list) {
+        if (root == null) {
+            return;
+        }
+
+        int length = list.size();
+        if (length <= i) {
+            for (int j = 0; j <= i - length; j++) {
+                list.add(length + j, null);
+            }
+        }
+
+        list.set(i, root.val);
+        levelOrder(root.left, 2 * i, list);
+        levelOrder(root.right, 2 * i + 1, list);
+    }
 
 
     static class TreeNode {
