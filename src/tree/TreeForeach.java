@@ -2,6 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 /*
 二叉树遍历
@@ -28,9 +29,11 @@ public class TreeForeach {
         //preOrderRootLeftRight(node1);
         //midOrderLeftRootRight(node1);
         //afterOrderLeftRightRoot(node1);
-        ArrayList list = new ArrayList();
-        levelOrder(node1, 1, list);
-        System.out.println(Arrays.toString(list.toArray()));
+//        ArrayList list = new ArrayList();
+//        levelOrder(node1, 1, list);
+//        System.out.println(Arrays.toString(list.toArray()));
+
+        preOrderRootLeftRightIterate(node1);
     }
 
     //前序遍历
@@ -44,6 +47,24 @@ public class TreeForeach {
         preOrderRootLeftRight(root.right);
     }
 
+    //前序遍历
+    public static void preOrderRootLeftRightIterate(TreeNode root) {
+        if(root == null)
+            return;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (stack.isEmpty() == false){
+            root = stack.pop();
+            if(root != null){
+                System.out.println(root.val);
+                stack.push(root.right);
+                stack.push(root.left);
+            }
+        }
+    }
+
     //中序遍历
     public static void midOrderLeftRootRight(TreeNode root) {
         if (root == null) {
@@ -54,6 +75,9 @@ public class TreeForeach {
         System.out.println(root.val);
         midOrderLeftRootRight(root.right);
     }
+
+
+
 
 
     //后序遍历
