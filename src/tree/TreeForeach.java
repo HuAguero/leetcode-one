@@ -33,7 +33,8 @@ public class TreeForeach {
 //        levelOrder(node1, 1, list);
 //        System.out.println(Arrays.toString(list.toArray()));
 
-        preOrderRootLeftRightIterate(node1);
+        //preOrderRootLeftRightIterate(node1);
+        morrisOrderRootLeftRight(node1);
     }
 
     //前序遍历
@@ -62,6 +63,69 @@ public class TreeForeach {
                 stack.push(root.right);
                 stack.push(root.left);
             }
+        }
+    }
+
+    //前序
+    public static void morrisOrderRootLeftRight(TreeNode cur){
+        if(cur == null){
+            return;
+        }
+
+        TreeNode mostRight = null;
+        while (cur != null){
+            mostRight = cur.left;
+            if(mostRight != null){
+                while (mostRight.right != null && mostRight.right != cur){
+                    mostRight = mostRight.right;
+                }
+
+                if(mostRight.right == null){//建立线索指针
+                    mostRight.right = cur;
+                    System.out.println(cur.val);
+                    cur = cur.left;
+                    continue;
+                }
+                else if(mostRight.right == cur){//删除线索指针
+                    mostRight.right = null;
+                }
+            }
+            else {
+                System.out.println(cur.val);
+            }
+            cur = cur.right;
+        }
+    }
+
+    //中序
+    public static void morrisOrderLeftRootRight(TreeNode cur){
+        if(cur == null){
+            return;
+        }
+
+        TreeNode mostRight = null;
+        while (cur != null){
+            mostRight = cur.left;
+            if(mostRight != null){
+                while (mostRight.right != null && mostRight.right != cur){
+                    mostRight = mostRight.right;
+                }
+
+                if(mostRight.right == null){//建立线索指针
+                    mostRight.right = cur;
+                    //System.out.println(cur.val);
+                    cur = cur.left;
+                    continue;
+                }
+                else if(mostRight.right == cur){//删除线索指针
+                    mostRight.right = null;
+                }
+            }
+            else {
+                //System.out.println(cur.val);
+            }
+            System.out.println(cur.val);
+            cur = cur.right;
         }
     }
 
