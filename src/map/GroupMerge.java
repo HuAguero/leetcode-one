@@ -35,26 +35,26 @@ public class GroupMerge {
         }
     }
 
-    private static int getProvinceBfs(int[][] citiesConnected){
-        int cities = citiesConnected.length;
+    private static int getProvinceBfs(int[][] isConnected) {
+        int cities = isConnected.length;
         boolean[] visited = new boolean[cities];
         int provinces = 0;
 
         Queue<Integer> queue = new LinkedList<>();
 
-        for (int i = 0; i < cities; i++){
-            if(!visited[i]){
+        for (int i = 0; i < cities; i++) {
+            if (!visited[i]) {
                 queue.offer(i);
-                while (!queue.isEmpty()){
-                    int k = queue.poll();
-                    visited[k] = true;
-                    for(int j = 0; j< cities;j++){
-                        if(citiesConnected[i][j] == 1 && !visited[j]){
+                visited[i] = true;
+                while (!queue.isEmpty()) {
+                    int v = queue.poll();
+                    for (int j = 0; j < cities; j++) {
+                        if (isConnected[v][j] == 1 && !visited[j]) {
+                            visited[j]=true;
                             queue.offer(j);
                         }
                     }
                 }
-
                 provinces++;
             }
         }
